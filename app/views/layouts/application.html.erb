@@ -10,5 +10,11 @@
 
 <%= yield %>
 
+<% if current_user %>
+  <%= current_user.name %> <%= link_to 'Logout', logout_path %>
+<% else %>
+  <%= link_to 'Login', '/auth/github' %>
+<% end %>
+
 </body>
 </html>
