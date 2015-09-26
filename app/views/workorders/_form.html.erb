@@ -1,0 +1,17 @@
+<%= form_for(@workorder) do |f| %>
+  <% if @workorder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workorder.errors.count, "error") %> prohibited this workorder from being saved:</h2>
+
+      <ul>
+      <% @workorder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
