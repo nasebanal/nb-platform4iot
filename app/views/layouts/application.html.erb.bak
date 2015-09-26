@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NbPlatform4iot</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+<% if current_user %>
+  <%= current_user.name %> <%= link_to 'Logout', logout_path %>
+<% else %>
+  <%= link_to 'Login', '/auth/github' %>
+<% end %>
+
+</body>
+</html>
