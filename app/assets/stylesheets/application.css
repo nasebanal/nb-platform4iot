@@ -15,7 +15,6 @@
  *= require_self
  */
 
-body {
-  padding-top: 70px;
-  padding-bottom: 20px;
+div.content {
+	padding: 70px 20px 20px 80px;
 }
