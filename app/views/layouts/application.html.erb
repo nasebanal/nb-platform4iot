@@ -45,7 +45,7 @@
 
           <form class="navbar-form navbar-right">
             <% if current_user %>
-              <%= current_user.name %> <%= link_to 'Logout', logout_path, class: 'btn btn-success' %>
+              <font color="white"><%= current_user.name %></font> <%= link_to 'Logout', logout_path, class: 'btn btn-success' %>
 
             <% else %>
             <%= link_to 'Login', '/auth/github', class: 'btn btn-success' %>

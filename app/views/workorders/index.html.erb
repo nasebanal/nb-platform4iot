@@ -1,20 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Workorders</h1>
+<h1>Work Orders</h1>
 
-<table>
+<table class="table table-contextual">
   <thead>
     <tr>
-      <th colspan="3"></th>
+			<th>ID</th>
+			<th>PROC MODE</th>
+			<th>STATUS</th>
+			<th>CREATOR</th>
+			<th>ACTION</th>
     </tr>
   </thead>
 
   <tbody>
     <% @workorders.each do |workorder| %>
       <tr>
-        <td><%= link_to 'Show', workorder %></td>
-        <td><%= link_to 'Edit', edit_workorder_path(workorder) %></td>
-        <td><%= link_to 'Destroy', workorder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				<td><%= workorder.id %></td>
+				<td><%= workorder.proc_mode %></td>
+				<td><%= workorder.status %></td>
+				<td><%= workorder.creator %></td>
+        <td><%= link_to 'Show', workorder, class: 'btn btn-success' %>
+        <%= link_to 'Edit', edit_workorder_path(workorder), class: 'btn btn-success' %>
+        <%= link_to 'Destroy', workorder, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-success' %></td>
       </tr>
     <% end %>
   </tbody>
