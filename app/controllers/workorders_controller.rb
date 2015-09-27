@@ -5,7 +5,7 @@ class WorkordersController < ApplicationController
   # GET /workorders
   # GET /workorders.json
   def index
-    @workorders = Workorder.all
+    @workorders = Workorder.order(:id)
   end
 
   # GET /workorders/1
