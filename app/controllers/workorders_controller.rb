@@ -1,5 +1,6 @@
 class WorkordersController < ApplicationController
   before_action :set_workorder, only: [:show, :edit, :update, :destroy]
+	helper_method :get_class
 
   # GET /workorders
   # GET /workorders.json
@@ -24,7 +25,8 @@ class WorkordersController < ApplicationController
   # POST /workorders
   # POST /workorders.json
   def create
-    @workorder = Workorder.new(workorder_params)
+		attr = params.require(:workorder).permit(:proc_mode)
+		@workorder = Workorder.new(attr)
 
     respond_to do |format|
       if @workorder.save
@@ -62,6 +64,16 @@ class WorkordersController < ApplicationController
   end
 
   private
+
+		def get_class (status)
+
+			if status == 1 then
+				return "success"
+			elsif status == 2 then
+				return "danger"
+			end
+		end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_workorder
       @workorder = Workorder.find(params[:id])

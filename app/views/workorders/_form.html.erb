@@ -11,6 +11,9 @@
     </div>
   <% end %>
 
+	<%= f.label :proc_mode %>
+	<%= f.select :proc_mode, [['L0', 0], ['L1', 1], ['L2', 2]] %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

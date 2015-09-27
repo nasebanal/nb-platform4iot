@@ -15,7 +15,7 @@
 
   <tbody>
     <% @workorders.each do |workorder| %>
-      <tr>
+      <tr class="<%= get_class(workorder.status) %>">
 				<td><%= workorder.id %></td>
 				<td><%= workorder.proc_mode %></td>
 				<td><%= workorder.status %></td>
