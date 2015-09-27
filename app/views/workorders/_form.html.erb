@@ -11,10 +11,21 @@
     </div>
   <% end %>
 
-	<%= f.label :proc_mode %>
-	<%= f.select :proc_mode, [['L0', 0], ['L1', 1], ['L2', 2]] %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<table>
+		<tr>
+			<td><%= f.label :proc_mode %></td>
+			<td><%= f.select :proc_mode, [['L0', 0], ['L1', 1], ['L2', 2]] %></td>
+		</tr>
+
+		<tr>
+			<td><%= f.label :data_set %></td>
+			<td><%= f.text_field :data_set %></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td><%= f.submit %></td>
+		</tr>
+	</table>
 <% end %>

@@ -1,4 +1,50 @@
 <p id="notice"><%= notice %></p>
 
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>KEY</th>
+			<th>VALUE</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td>ID</td>
+			<td><%= @workorder[:id] %></td>
+		</tr>
+
+		<tr>
+			<td>DATA SET</td>
+			<td><%= @workorder[:data_set] %></td>
+		</tr>
+
+		<tr>
+			<td>PROC MODE</td>
+			<td><%= @workorder[:proc_mode] %></td>
+		</tr>
+
+		<tr>
+			<td>STATUS</td>
+			<td><%= @workorder[:status] %></td>
+		</tr>
+
+		<tr>
+			<td>CREATOR</td>
+			<td><%= @workorder[:creator] %></td>
+		</tr>
+
+		<tr>
+			<td>CREATED AT</td>
+			<td><%= @workorder[:created_at] %></td>
+		</tr>
+
+		<tr>
+			<td>UPDATED AT</td>
+			<td><%= @workorder[:updated_at] %></td>
+		</tr>
+	</tbody>
+</table>
+
 <%= link_to 'Edit', edit_workorder_path(@workorder) %> |
 <%= link_to 'Back', workorders_path %>

@@ -11,6 +11,7 @@ class WorkordersController < ApplicationController
   # GET /workorders/1
   # GET /workorders/1.json
   def show
+		@workorder = Workorder.find(params[:id])
   end
 
   # GET /workorders/new
@@ -28,7 +29,7 @@ class WorkordersController < ApplicationController
 
 		user = User.find(session[:user_id])
 		params[:workorder][:creator] = user[:name]
-		attr = params.require(:workorder).permit(:proc_mode, :creator)
+		attr = params.require(:workorder).permit(:proc_mode, :data_set, :creator)
 
 		@workorder = Workorder.new(attr)
 

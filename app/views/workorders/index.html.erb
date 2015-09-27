@@ -10,6 +10,7 @@
   <thead>
     <tr>
 			<th>ID</th>
+			<th>DATA SET</th>
 			<th>PROC MODE</th>
 			<th>STATUS</th>
 			<th>CREATOR</th>
@@ -21,6 +22,7 @@
     <% @workorders.each do |workorder| %>
       <tr class="<%= get_class(workorder.status) %>">
 				<td><%= workorder.id %></td>
+				<td><%= workorder.data_set %></td>
 				<td><%= get_proc_mode(workorder.proc_mode) %></td>
 				<td><%= get_status(workorder.status) %></td>
 				<td><%= workorder.creator %></td>
