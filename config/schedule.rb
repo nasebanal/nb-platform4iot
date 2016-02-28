@@ -25,3 +25,7 @@ set :environment, :development
 every '* * * * *' do
 	rake 'wo:create_wo'
 end
+
+every '* * * * *' do
+	rake 'wo:process_wo'
+end

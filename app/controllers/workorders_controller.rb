@@ -9,17 +9,23 @@ class WorkordersController < ApplicationController
 
 		#======= Get Parameters =======
 
-		@procmode_id = params[:procmode_id]
+		if params[:procmode_id].present?
 
-		if @procmode_id.blank?
-			@procmode_id = 0
+			@procmode_id = params[:procmode_id].to_i
+		else
+
+			@procmode_id = -1
 		end
 
-		@status_id	= params[:status_id]
 
-		if @status_id.blank?
-			@status_id = 0
+		if params[:status_id].present?
+
+			@status_id = params[:status_id].to_i
+		else
+
+			@status_id = -1
 		end
+
 
 		start_year = params[:start_year]
 		start_month = params[:start_month]
@@ -42,6 +48,7 @@ class WorkordersController < ApplicationController
 		end_min = params[:end_min]
 		end_sec = params[:end_sec]
 
+
 		if end_year.present? and end_month.present? and end_day.present? and end_hour.present? and end_min.present? and end_sec.present?
 			end_date = "%04d%02d%02d%02d%02d%02d" % [end_year.to_i, end_month.to_i, end_day.to_i, end_hour.to_i, end_min.to_i, end_sec.to_i]
 		else
@@ -51,7 +58,11 @@ class WorkordersController < ApplicationController
 
 		#======= Get WO lists =======
 
-    @workorders = Workorder.where("status_id = ? and procmode_id = ? and ? <= obstime and obstime <= ?", @status_id, @procmode_id, start_date, end_date).order("id DESC")
+		if @status_id != -1 and @procmode_id != -1
+	   	@workorders = Workorder.where("status_id = ? and procmode_id = ? and ? <= obstime and obstime <= ?", @status_id, @procmode_id,  start_date, end_date).order("id DESC")
+		else
+			@workorders = Workorder.where("? <= obstime and obstime <= ?", start_date, end_date).order("id DESC")
+		end
 
 
 		#======= Get Wait Time =======
@@ -129,13 +140,13 @@ class WorkordersController < ApplicationController
 
   private
 
-		def get_class (status)
+		def get_class (status_id)
 
-			case status
+			case status_id
 
-				when 1 then
-					return "success"
 				when 2 then
+					return "success"
+				when 3 then
 					return "danger"
 
 			end
@@ -150,7 +161,7 @@ class WorkordersController < ApplicationController
 		def set_form
 
 			@workorders = Workorder.select(:data_set).order("data_set DESC").uniq
-			@statuses = Status.all
+			@statuses = Status.select(:name, :id)
 			@procmodes = Procmode.all
 
 
@@ -161,12 +172,20 @@ class WorkordersController < ApplicationController
 			@start_year = params[:start_year]
 			@end_year = params[:end_year]
 
+			if @end_year.nil?
+				@end_year = time.year
+			end
+
 
     	#======= Get Month List =======
 
     	@month_list = (1..12).to_a
     	@start_month = params[:start_month]
     	@end_month = params[:end_month]
+
+			if @end_month.nil?
+				@end_month = time.month
+			end
 
 
     	#======= Get Day List =======
@@ -175,11 +194,19 @@ class WorkordersController < ApplicationController
     	@start_day = params[:start_day]
     	@end_day = params[:end_day]
 
+			if @end_day.nil?
+				@end_day = time.day
+			end
+
 			#====== Get Hour List =======
 
 			@hour_list = (0..23).to_a
 			@start_hour = params[:start_hour]
 			@end_hour = params[:end_hour]
+
+			if @end_hour.nil?
+				@end_hour = time.hour
+			end
 
 			#====== Get Min List =======
 
@@ -187,13 +214,19 @@ class WorkordersController < ApplicationController
       @start_min = params[:start_min]
       @end_min = params[:end_min]
 
+			if @end_min.nil?
+				@end_min = time.min
+			end
+
 			#====== Get Sec List =======
 
       @sec_list = (0..59).to_a
       @start_sec = params[:start_sec]
       @end_sec = params[:end_sec]
 
-
+			if @end_sec.nil?
+				@end_sec = time.sec
+			end
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.

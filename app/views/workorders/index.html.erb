@@ -56,7 +56,7 @@ setTimeout("location.reload()", <%= @wait_time %>);
 
   <tbody>
     <% @workorders.each do |workorder| %>
-      <tr class="<%= workorder.status.name %>">
+      <tr class="<%= get_class(workorder.status_id) %>">
 				<td><%= workorder.id %></td>
 				<td><a href="/assets/<%= workorder.data_set %>" target="_blank"><%= workorder.data_set %></a></td>
 				<td><%= workorder.obstime %></td>
