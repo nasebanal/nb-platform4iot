@@ -113,6 +113,7 @@ class WorkordersController < ApplicationController
     end
 
 		def set_form
+			@workorders = Workorder.select(:data_set).order("data_set DESC").uniq
 			@statuses = Status.all
 			@procmodes = Procmode.all
 		end

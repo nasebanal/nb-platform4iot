@@ -25,7 +25,7 @@
 
 		<tr>
 			<td>Data Set</td>
-			<td><%= f.text_field :data_set %></td>
+			<td><%= f.select(:data_set, @workorders.map{|t|[t.data_set, t.data_set]}) %></td>
 		</tr>
 
 		<tr>
