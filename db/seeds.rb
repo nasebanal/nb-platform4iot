@@ -11,3 +11,7 @@ Status.create(:id => 0, :name => 'Waiting')
 Status.create(:id => 1, :name => 'In Process')
 Status.create(:id => 2, :name => 'Succeeded')
 Status.create(:id => 3, :name => 'Failured')
+Procmode.create(:id => 0, :name => 'L0')
+Procmode.create(:id => 1, :name => 'L1')
+Procmode.create(:id => 2, :name => 'L2')
+

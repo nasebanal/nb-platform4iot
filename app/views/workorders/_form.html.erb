@@ -14,12 +14,17 @@
 
 	<table>
 		<tr>
-			<td><%= f.label :proc_mode %></td>
-			<td><%= f.select :proc_mode, [['L0', 0], ['L1', 1], ['L2', 2]] %></td>
+			<th>KEY</th>
+			<th>VALUE</th>
 		</tr>
 
 		<tr>
-			<td><%= f.label :data_set %></td>
+			<td>Process Mode</td>
+			<td><%= f.select(:procmode_id, @procmodes.map{|t|[t.name, t.id]}) %></td>
+		</tr>
+
+		<tr>
+			<td>Data Set</td>
 			<td><%= f.text_field :data_set %></td>
 		</tr>
 

@@ -53,7 +53,7 @@ class WorkordersController < ApplicationController
 
 		params[:workorder][:user_id] = session[:user_id]
 		params[:workorder][:status_id] = 0
-		attr = params.require(:workorder).permit(:proc_mode, :data_set, :user_id, :status_id)
+		attr = params.require(:workorder).permit(:procmode_id, :data_set, :user_id, :status_id)
 
 		@workorder = Workorder.new(attr)
 
@@ -106,33 +106,6 @@ class WorkordersController < ApplicationController
 			end
 		end
 
-		def get_proc_mode (proc_mode)
-
-			case proc_mode
-
-				when 0 then
-					return "L0"
-				when 1 then
-					return "L1"
-				when 2 then
-					return "L2"
-
-			end
-		end
-
-		def get_status (status)
-
-			case status
-
-				when 0 then
-					return "WAITING"
-				when 1 then
-					return "SUCCESS"
-				when 2 then
-					return "ERROR"
-
-			end
-		end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_workorder
@@ -141,6 +114,7 @@ class WorkordersController < ApplicationController
 
 		def set_form
 			@statuses = Status.all
+			@procmodes = Procmode.all
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.

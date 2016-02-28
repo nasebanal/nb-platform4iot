@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228122804) do
+ActiveRecord::Schema.define(version: 20160228125922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "procmodes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "settings", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,14 +47,15 @@ ActiveRecord::Schema.define(version: 20160228122804) do
   end
 
   create_table "workorders", force: :cascade do |t|
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "proc_mode",  default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "data_set"
     t.integer  "status_id"
     t.integer  "user_id"
+    t.integer  "procmode_id", default: 0
   end
 
+  add_index "workorders", ["procmode_id"], name: "index_workorders_on_procmode_id", using: :btree
   add_index "workorders", ["user_id"], name: "index_workorders_on_user_id", using: :btree
 
 end
