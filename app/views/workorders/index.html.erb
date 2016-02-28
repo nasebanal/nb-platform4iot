@@ -10,6 +10,11 @@ setTimeout("location.reload()", <%= @wait_time %>);
 
 <table class="table">
 	<tr>
+		<td>PROC MODE</td>
+		<td><%= select_tag :procmode_id, options_for_select(@procmodes.collect{|t|[t.name, t.id]}, @procmode_id) %></td>
+	</tr>
+
+	<tr>
 		<td>STATUS</td>
 		<td><%= select_tag :status_id, options_for_select(@statuses.collect{|t|[t.name, t.id]}, @status_id) %></td>
 	</tr>

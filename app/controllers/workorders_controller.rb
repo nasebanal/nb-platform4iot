@@ -9,6 +9,12 @@ class WorkordersController < ApplicationController
 
 		#======= Get Parameters =======
 
+		@procmode_id = params[:procmode_id]
+
+		if @procmode_id.blank?
+			@procmode_id = 0
+		end
+
 		@status_id	= params[:status_id]
 
 		if @status_id.blank?
@@ -18,7 +24,7 @@ class WorkordersController < ApplicationController
 
 		#======= Get WO lists =======
 
-    @workorders = Workorder.where(status_id:  @status_id).order("id DESC")
+    @workorders = Workorder.where("status_id = ? and procmode_id = ?", @status_id, @procmode_id).order("id DESC")
 
 
 		#======= Get Wait Time =======
