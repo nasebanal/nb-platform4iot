@@ -11,7 +11,7 @@ setTimeout("location.reload()", <%= @wait_time %>);
 <table class="table">
 	<tr>
 		<td>STATUS</td>
-		<td><%= text_field_tag :status, @status %></td>
+		<td><%= select_tag :status_id, options_for_select(@statuses.collect{|t|[t.name, t.id]}, @status_id) %></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -42,7 +42,7 @@ setTimeout("location.reload()", <%= @wait_time %>);
 				<td><%= workorder.id %></td>
 				<td><a href="/assets/<%= workorder.data_set %>" target="_blank"><%= workorder.data_set %></a></td>
 				<td><%= get_proc_mode(workorder.proc_mode) %></td>
-				<td><%= get_status(workorder.status) %></td>
+				<td><%= workorder.status.name %></td>
 				<td><%= workorder.creator %></td>
         <td><%= link_to 'Show', workorder, class: 'btn btn-success' %>
         <%= link_to 'Edit', edit_workorder_path(workorder), class: 'btn btn-success' %>

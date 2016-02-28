@@ -1,5 +1,6 @@
 class WorkordersController < ApplicationController
   before_action :set_workorder, only: [:show, :edit, :update, :destroy]
+	before_action :set_form, only: [:index, :new, :edit]
 	helper_method :get_class, :get_status, :get_proc_mode
 
   # GET /workorders
@@ -8,16 +9,16 @@ class WorkordersController < ApplicationController
 
 		#======= Get Parameters =======
 
-		@status	= params[:status]
+		@status_id	= params[:status_id]
 
-		if @status.blank?
-			@status = 0
+		if @status_id.blank?
+			@status_id = 0
 		end
 
 
 		#======= Get WO lists =======
 
-    @workorders = Workorder.where(status:  @status).order("id DESC")
+    @workorders = Workorder.where(status_id:  @status_id).order("id DESC")
 
 
 		#======= Get Wait Time =======
@@ -137,6 +138,10 @@ class WorkordersController < ApplicationController
     def set_workorder
       @workorder = Workorder.find(params[:id])
     end
+
+		def set_form
+			@statuses = Status.all
+		end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workorder_params
