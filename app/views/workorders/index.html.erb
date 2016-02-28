@@ -18,6 +18,18 @@ setTimeout("location.reload()", <%= @wait_time %>);
 		<td>STATUS</td>
 		<td><%= select_tag :status_id, options_for_select(@statuses.collect{|t|[t.name, t.id]}, @status_id) %></td>
 	</tr>
+
+	<tr>
+		<td>START DATE</td>
+		<td><%= select_tag :start_year, options_for_select(@year_list, @start_year) %> <%= select_tag :start_month, options_for_select(@month_list, @start_month) %> <%= select_tag :start_day, options_for_select(@day_list, @start_day) %> - <%= select_tag :start_hour, options_for_select(@hour_list, @start_hour) %> <%= select_tag :start_min, options_for_select(@min_list, @start_min) %> <%= select_tag :start_sec, options_for_select(@sec_list, @start_sec) %>
+</td>
+	</tr>
+
+  <tr>
+    <td>END DATE</td>
+    <td><%= select_tag :end_year, options_for_select(@year_list, @end_year) %> <%= select_tag :end_month, options_for_select(@month_list, @end_month) %> <%= select_tag :end_day, options_for_select(@day_list, @end_day) %> - <%= select_tag :end_hour, options_for_select(@hour_list, @end_hour) %> <%= select_tag :end_min, options_for_select(@min_list, @end_min) %> <%= select_tag :end_sec, options_for_select(@sec_list, @end_sec) %></td>
+  </tr>
+
 	<tr>
 		<td></td>
 		<td><%= submit_tag 'display' %></td>
@@ -34,6 +46,7 @@ setTimeout("location.reload()", <%= @wait_time %>);
     <tr>
 			<th>ID</th>
 			<th>DATA SET</th>
+			<th>OBS TIME</th>
 			<th>PROC MODE</th>
 			<th>STATUS</th>
 			<th>CREATOR</th>
@@ -43,9 +56,10 @@ setTimeout("location.reload()", <%= @wait_time %>);
 
   <tbody>
     <% @workorders.each do |workorder| %>
-      <tr class="<%= get_class(workorder.status) %>">
+      <tr class="<%= workorder.status.name %>">
 				<td><%= workorder.id %></td>
 				<td><a href="/assets/<%= workorder.data_set %>" target="_blank"><%= workorder.data_set %></a></td>
+				<td><%= workorder.obstime %></td>
 				<td><%= workorder.procmode.name %></td>
 				<td><%= workorder.status.name %></td>
 				<td><%= workorder.user.name %></td>

@@ -10,11 +10,15 @@ namespace :wo do
 			next unless FileTest.file?(f)
 
 			filename = File.basename(f)
-			Workorder.create(:status_id => 0, :procmode_id => 0, :user_id => 0,:data_set => filename)
+			obstime = filename[4,14]
+
+			Workorder.create(:status_id => 0, :procmode_id => 0, :user_id => 0, :obstime => obstime,:data_set => filename)
 
 			new_file_path = Rails.root.to_s + "/app/assets/images/"
 			FileUtils::mv(f, new_file_path)
+
 			puts filename
+			puts obstime
 		}
 	end
 end

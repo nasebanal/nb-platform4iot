@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228125922) do
+ActiveRecord::Schema.define(version: 20160228152748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20160228125922) do
     t.integer  "status_id"
     t.integer  "user_id"
     t.integer  "procmode_id", default: 0
+    t.string   "obstime"
   end
 
   add_index "workorders", ["procmode_id"], name: "index_workorders_on_procmode_id", using: :btree

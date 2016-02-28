@@ -21,10 +21,37 @@ class WorkordersController < ApplicationController
 			@status_id = 0
 		end
 
+		start_year = params[:start_year]
+		start_month = params[:start_month]
+		start_day = params[:start_day]
+		start_hour = params[:start_hour]
+		start_min = params[:start_min]
+		start_sec = params[:start_sec]
+
+		if start_year.present? and start_month.present? and start_day.present? and start_hour.present? and start_min.present? and start_sec.present?
+			start_date = "%04d%02d%02d%02d%02d%02d" % [start_year.to_i, start_month.to_i, start_day.to_i, start_hour.to_i, start_min.to_i, start_sec.to_i]
+		else
+			start_date = "00000000000000"
+		end
+
+
+		end_year = params[:end_year]
+		end_month = params[:end_month]
+		end_day = params[:end_day]
+		end_hour = params[:end_hour]
+		end_min = params[:end_min]
+		end_sec = params[:end_sec]
+
+		if end_year.present? and end_month.present? and end_day.present? and end_hour.present? and end_min.present? and end_sec.present?
+			end_date = "%04d%02d%02d%02d%02d%02d" % [end_year.to_i, end_month.to_i, end_day.to_i, end_hour.to_i, end_min.to_i, end_sec.to_i]
+		else
+			end_date = "99999999999999"
+		end
+
 
 		#======= Get WO lists =======
 
-    @workorders = Workorder.where("status_id = ? and procmode_id = ?", @status_id, @procmode_id).order("id DESC")
+    @workorders = Workorder.where("status_id = ? and procmode_id = ? and ? <= obstime and obstime <= ?", @status_id, @procmode_id, start_date, end_date).order("id DESC")
 
 
 		#======= Get Wait Time =======
@@ -59,7 +86,9 @@ class WorkordersController < ApplicationController
 
 		params[:workorder][:user_id] = session[:user_id]
 		params[:workorder][:status_id] = 0
-		attr = params.require(:workorder).permit(:procmode_id, :data_set, :user_id, :status_id)
+#		params[:workorder][:obstime] = Time.now.strftime('%Y%m%d%H%M%S')
+		params[:workorder][:obstime] = "20150101010101"
+		attr = params.require(:workorder).permit(:procmode_id, :data_set, :user_id, :status_id, :obstime)
 
 		@workorder = Workorder.new(attr)
 
@@ -119,9 +148,52 @@ class WorkordersController < ApplicationController
     end
 
 		def set_form
+
 			@workorders = Workorder.select(:data_set).order("data_set DESC").uniq
 			@statuses = Status.all
 			@procmodes = Procmode.all
+
+
+			#======= Get Year List =======
+
+			time = Time.now
+			@year_list = (2016..time.year).to_a
+			@start_year = params[:start_year]
+			@end_year = params[:end_year]
+
+
+    	#======= Get Month List =======
+
+    	@month_list = (1..12).to_a
+    	@start_month = params[:start_month]
+    	@end_month = params[:end_month]
+
+
+    	#======= Get Day List =======
+
+    	@day_list = (1..31).to_a
+    	@start_day = params[:start_day]
+    	@end_day = params[:end_day]
+
+			#====== Get Hour List =======
+
+			@hour_list = (0..23).to_a
+			@start_hour = params[:start_hour]
+			@end_hour = params[:end_hour]
+
+			#====== Get Min List =======
+
+      @min_list = (0..59).to_a
+      @start_min = params[:start_min]
+      @end_min = params[:end_min]
+
+			#====== Get Sec List =======
+
+      @sec_list = (0..59).to_a
+      @start_sec = params[:start_sec]
+      @end_sec = params[:end_sec]
+
+
 		end
 
     # Never trust parameters from the scary internet, only allow the white list through.
