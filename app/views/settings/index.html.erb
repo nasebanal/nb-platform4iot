@@ -2,23 +2,23 @@
 
 <h1>Listing Settings</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Wait time</th>
-      <th colspan="3"></th>
+      <th>USER</th>
+      <th>WAITING TIME</th>
+      <th width="150">ACTION</th>
     </tr>
   </thead>
 
   <tbody>
     <% @settings.each do |setting| %>
       <tr>
-        <td><%= setting.user_id %></td>
+        <td><%= setting.user.name %></td>
         <td><%= setting.wait_time %></td>
-        <td><%= link_to 'Show', setting %></td>
-        <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
-        <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', setting, class: "btn btn-primary btn-block" %>
+        <%= link_to 'Edit', edit_setting_path(setting), class: "btn btn-primary btn-block" %>
+        <%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary btn-block" %></td>
       </tr>
     <% end %>
   </tbody>

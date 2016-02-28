@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
+	before_action :get_user, only: [:new, :edit]
 
   # GET /settings
   # GET /settings.json
@@ -66,6 +67,10 @@ class SettingsController < ApplicationController
     def set_setting
       @setting = Setting.find(params[:id])
     end
+
+		def get_user
+			@user = User.find(session[:user_id])
+		end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
