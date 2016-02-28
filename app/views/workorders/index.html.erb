@@ -43,7 +43,7 @@ setTimeout("location.reload()", <%= @wait_time %>);
 				<td><a href="/assets/<%= workorder.data_set %>" target="_blank"><%= workorder.data_set %></a></td>
 				<td><%= get_proc_mode(workorder.proc_mode) %></td>
 				<td><%= workorder.status.name %></td>
-				<td><%= workorder.creator %></td>
+				<td><%= workorder.user.name %></td>
         <td><%= link_to 'Show', workorder, class: 'btn btn-success' %>
         <%= link_to 'Edit', edit_workorder_path(workorder), class: 'btn btn-success' %>
         <%= link_to 'Destroy', workorder, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-success' %></td>

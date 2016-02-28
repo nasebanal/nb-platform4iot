@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.create(:id => 0, :name => 'System')
 Status.create(:id => 0, :name => 'Waiting')
 Status.create(:id => 1, :name => 'In Process')
 Status.create(:id => 2, :name => 'Succeeded')

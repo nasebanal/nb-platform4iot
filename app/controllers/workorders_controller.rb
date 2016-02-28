@@ -51,9 +51,9 @@ class WorkordersController < ApplicationController
   # POST /workorders.json
   def create
 
-		user = User.find(session[:user_id])
-		params[:workorder][:creator] = user[:name]
-		attr = params.require(:workorder).permit(:proc_mode, :data_set, :creator)
+		params[:workorder][:user_id] = session[:user_id]
+		params[:workorder][:status_id] = 0
+		attr = params.require(:workorder).permit(:proc_mode, :data_set, :user_id, :status_id)
 
 		@workorder = Workorder.new(attr)
 
