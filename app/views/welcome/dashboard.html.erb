@@ -1,7 +1,7 @@
 <%= javascript_include_tag "reload" %>
 
 <script type="text/javascript">
-setTimeout("location.reload()", 1000*<%= @wait_time %>);
+setTimeout("location.reload()", <%= @wait_time %>);
 </script>
 
 <p id="notice"><%= notice %></p>

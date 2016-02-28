@@ -1,6 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+<script type="text/javascript">
+setTimeout("location.reload()", <%= @wait_time %>);
+</script>
+
 <h1>Work Orders</h1>
+
+<%= form_tag('/workorders', method: 'get') do %>
+
+<table class="table">
+	<tr>
+		<td>STATUS</td>
+		<td><%= text_field_tag :status, @status %></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><%= submit_tag 'display' %></td>
+	</tr>
+</table>
+<% end %>
 
 <%= link_to 'New Workorder', new_workorder_path %>
 

@@ -6,9 +6,9 @@ class WelcomeController < ApplicationController
 			user = User.find(session[:user_id])
 
 			if user.setting
-				@wait_time = user.setting.wait_time
+				@wait_time = user.setting.wait_time * 1000
 			else
-				@wait_time = 10
+				@wait_time = 10 * 1000
 			end
 
 			render :dashboard

@@ -5,7 +5,30 @@ class WorkordersController < ApplicationController
   # GET /workorders
   # GET /workorders.json
   def index
-    @workorders = Workorder.order("id DESC")
+
+		#======= Get Parameters =======
+
+		@status	= params[:status]
+
+		if @status.blank?
+			@status = 0
+		end
+
+
+		#======= Get WO lists =======
+
+    @workorders = Workorder.where(status:  @status).order("id DESC")
+
+
+		#======= Get Wait Time =======
+
+		user = User.find(session[:user_id])
+
+		if user.setting
+			@wait_time = user.setting.wait_time * 1000
+		else
+			@wait_time = 10 * 1000
+		end
   end
 
   # GET /workorders/1
