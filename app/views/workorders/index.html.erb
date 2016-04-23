@@ -48,6 +48,7 @@ setTimeout("location.reload()", <%= @wait_time %>);
 			<th>DATA SET</th>
 			<th>OBS TIME</th>
 			<th>PROC MODE</th>
+			<th>ALERT FLAG</th>
 			<th>STATUS</th>
 			<th>CREATOR</th>
 			<th>ACTION</th>
@@ -61,6 +62,7 @@ setTimeout("location.reload()", <%= @wait_time %>);
 				<td><a href="/assets/<%= workorder.data_set %>" target="_blank"><%= workorder.data_set %></a></td>
 				<td><%= workorder.obstime %></td>
 				<td><%= workorder.procmode.name %></td>
+				<td><%= workorder.alert_flag %></td>
 				<td><%= workorder.status.name %></td>
 				<td><%= workorder.user.name %></td>
         <td><%= link_to 'Show', workorder, class: 'btn btn-success' %>

@@ -74,6 +74,11 @@ class WorkordersController < ApplicationController
 		else
 			@wait_time = 10 * 1000
 		end
+
+		respond_to do |format|
+			format.html
+			format.json { render json: Workorder.order("id DESC").limit(10)}
+		end
   end
 
   # GET /workorders/1
