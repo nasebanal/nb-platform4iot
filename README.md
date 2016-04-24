@@ -1,7 +1,10 @@
 # NASEBANAL Platform for Iot
 
 This is an open source project for the IoT platform.
-You can see the demo from https://www.youtube.com/watch?v=p_HXt_Oj4GI
+You can see the demo below.
+
+* https://www.youtube.com/watch?v=Nzi7-NeNe_I (v0.2)
+* https://www.youtube.com/watch?v=p_HXt_Oj4GI (v0.1)
 
 
 [Prerequisite]
