@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
 	helper_method :current_user
 
+  def authenticate_user!
+    redirect_to '/auth/github' unless session[:user_id]
+  end
+
   private
 
   def current_user

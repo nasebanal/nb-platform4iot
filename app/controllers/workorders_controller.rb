@@ -1,4 +1,5 @@
 class WorkordersController < ApplicationController
+	before_action :authenticate_user!
   before_action :set_workorder, only: [:show, :edit, :update, :destroy]
 	before_action :set_form, only: [:index, :new, :edit]
 	helper_method :get_class, :get_status, :get_proc_mode

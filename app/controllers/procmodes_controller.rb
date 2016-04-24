@@ -1,4 +1,5 @@
 class ProcmodesController < ApplicationController
+	before_action :authenticate_user!
   before_action :set_procmode, only: [:show, :edit, :update, :destroy]
 
   # GET /procmodes

@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
 				@wait_time = 10 * 1000
 			end
 
-			format.html { render :dashboard}
+			render :dashboard
 		end
   end
 end
