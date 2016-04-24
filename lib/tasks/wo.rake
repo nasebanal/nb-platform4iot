@@ -5,25 +5,36 @@ namespace :wo do
 
 	task :create_wo => :environment do
 
-		Find.find(Rails.root.to_s + "/app/assets/images/waiting"){|f|
-			
-			next unless FileTest.file?(f)
+		obstime = "-"
+		dirs = Dir.glob(Rails.root.to_s + "/app/assets/images/waiting/**")
 
-			filename = File.basename(f)
-			obstime = filename[4,14]
+		dirs.each{|d|
+			
+			next unless FileTest.directory?(d)
+
+			path, dirname = File.split(d)
+
+			Find.find(d){|f|
+				next unless FileTest.file?(f)
+
+				filename = File.basename(f)
+
+				if metafile = filename.match(/(.+).meta/) then
+
+					obstime = metafile[1]
+				end
+			}
 
 
 			#======= Move files =======
 
-			new_file_path = Rails.root.to_s + "/app/assets/images/"
-			FileUtils::mv(f, new_file_path)
+			new_dir_path = Rails.root.to_s + "/app/assets/images/"
+			FileUtils::mv(d, new_dir_path)
 
 			#======= Create WO =======
 
-		  Workorder.create(:status_id => 0, :procmode_id => 0, :user_id => 0, :obstime => obstime,:data_set => filename)
+		  Workorder.create(:status_id => 0, :procmode_id => 0, :user_id => 0, :obstime => obstime,:data_set => dirname)
 
-			puts filename
-			puts obstime
 		}
 	end
 
