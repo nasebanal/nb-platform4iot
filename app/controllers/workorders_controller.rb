@@ -104,7 +104,8 @@ class WorkordersController < ApplicationController
 		params[:workorder][:user_id] = session[:user_id]
 		params[:workorder][:status_id] = 0
 #		params[:workorder][:obstime] = Time.now.strftime('%Y%m%d%H%M%S')
-		params[:workorder][:obstime] = "20150101010101"
+		params[:workorder][:obstime] = params[:workorder][:data_set]
+
 		attr = params.require(:workorder).permit(:procmode_id, :data_set, :user_id, :status_id, :obstime)
 
 		@workorder = Workorder.new(attr)
