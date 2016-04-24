@@ -16,7 +16,14 @@ Step.1) Get source code.
 
  $ git clone https://github.com/nasebanal/nb-platform4iot.git
 
-Step.2) Run the service.
+Step.2 Setup environment variable
+
+PARAMETER|DESCRIPTION|EXAMPLE
+---------|-----------|-------
+NB_GITHUB_KEY|Public key for GitHub User Auth|xxxx
+NB_GITHUB_SECRET|Secret key for GitHub User Auth|xxxx
+
+Step.3) Run the service.
 
  $ rails s -b 0.0.0.0
 
