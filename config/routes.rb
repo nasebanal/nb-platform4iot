@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'alert/index'
+
   resources :procmodes
   resources :statuses
   resources :settings

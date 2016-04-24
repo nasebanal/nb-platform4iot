@@ -78,7 +78,7 @@ class WorkordersController < ApplicationController
 
 		respond_to do |format|
 			format.html
-			format.json { render json: Workorder.order("id DESC").limit(10)}
+			format.json { render json: @workorders}
 		end
   end
 
